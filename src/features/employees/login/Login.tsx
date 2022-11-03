@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch } from '../../../app/hooks'
 import { Button, Form, Input } from 'antd'
+import { loginEmployee } from '../employeeSlice'
 
 const Login = () => {
   const dispatch = useAppDispatch()
 
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const handleFinish = () => {
+    dispatch(
+      loginEmployee({
+        email,
+        password
+      })
+    )
+  }
+
   return (
     <div>
-      <Form name='register'>
+      <Form onFinish={handleFinish} name='login'>
         <Form.Item
           name='email'
           label='E-mail'
@@ -22,7 +35,7 @@ const Login = () => {
             }
           ]}
         >
-          <Input />
+          <Input onChange={(e) => setEmail(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -36,7 +49,7 @@ const Login = () => {
           ]}
           hasFeedback
         >
-          <Input.Password />
+          <Input.Password onChange={(e) => setPassword(e.target.value)} />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

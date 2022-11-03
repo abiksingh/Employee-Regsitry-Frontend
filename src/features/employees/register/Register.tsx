@@ -20,10 +20,6 @@ const Register = () => {
     )
   }
 
-  console.log(name)
-  console.log(email)
-  console.log(password)
-
   return (
     <div>
       <Form onFinish={handleFinish} name='register'>
