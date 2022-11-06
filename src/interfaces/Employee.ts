@@ -34,5 +34,14 @@ export interface IEmployeeModal {
   handleCancel: () => void
   open: boolean
   showModal: () => void
-  buttonName: string
+  buttonName?: string
+}
+
+export interface IEditEmployee {
+  handleOk: () => void
+  handleCancel: () => void
+  open: any
+  setOpen: (open: boolean) => void
+  setEditEmployee: (employee: any) => void
+  editEmployee: any
 }

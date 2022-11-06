@@ -37,3 +37,29 @@ export const addEmployee = (payload: IEmployee) => {
     }
   })
 }
+
+export const editEmployee = (id: string | undefined, payload: IEmployee) => {
+  const token = localStorage.getItem('employeeInfo')
+  if (!token) {
+    return
+  }
+
+  return axios.put(`${domain}/${id}`, payload, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`
+    }
+  })
+}
+
+export const deleteEmployee = (id: string) => {
+  const token = localStorage.getItem('employeeInfo')
+  if (!token) {
+    return
+  }
+
+  return axios.delete(`${domain}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`
+    }
+  })
+}

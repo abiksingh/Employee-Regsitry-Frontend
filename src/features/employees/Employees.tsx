@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { addEmployees, getEmployees } from './employeeSlice'
-import { Form, Input, List } from 'antd'
-import EmployeeModal from '../../common/EmployeeModal'
+import { editEmployees, getEmployees } from './employeeSlice'
+import { Table } from 'antd'
 import { IEmployee } from '../../interfaces/Employee'
+import { generateEmployeeTableColumns } from '../../components/table-columns/generateEmployeeTableColumns'
+import AddEmployee from './add-employee/AddEmployee'
+import EditEmployee from './edit-employee/EditEmployee'
 
 const Employees = () => {
   const dispatch = useAppDispatch()
 
   const { employees } = useAppSelector((state) => state.employee)
-  const [open, setOpen] = useState<boolean>(false)
 
-  const [addEmployee, setAddEmployee] = useState<IEmployee>({
+  const [editEmployee, setEditEmployee] = useState<IEmployee>({
     username: '',
     firstName: '',
     lastName: '',
@@ -19,6 +20,8 @@ const Employees = () => {
     role: '',
     address: ''
   })
+  const [open, setOpen] = useState<boolean>(false)
+  const [employeeId, setEmployeeId] = useState<string | undefined>('')
 
   useEffect(() => {
     dispatch(getEmployees())
@@ -30,13 +33,14 @@ const Employees = () => {
 
   const handleOk = () => {
     dispatch(
-      addEmployees({
-        username: addEmployee.username,
-        email: addEmployee.email,
-        firstName: addEmployee.firstName,
-        lastName: addEmployee.lastName,
-        role: addEmployee.role,
-        address: addEmployee.address
+      editEmployees({
+        username: editEmployee.username,
+        email: editEmployee.email,
+        firstName: editEmployee.firstName,
+        lastName: editEmployee.lastName,
+        role: editEmployee.role,
+        address: editEmployee.address,
+        _id: employeeId
       })
     )
 
@@ -46,54 +50,33 @@ const Employees = () => {
   return (
     <div>
       <h1>Employees</h1>
-      <List itemLayout='horizontal' dataSource={employees} renderItem={(item) => <List.Item>{item.username}</List.Item>} />
-      <EmployeeModal
-        title={'Add Employee'}
+      <Table
+        rowKey='_id'
+        onRow={(record) => {
+          return {
+            onDoubleClick: () => {
+              setEmployeeId(record._id)
+              setEditEmployee({
+                ...record
+              })
+
+              setOpen(true)
+            }
+          }
+        }}
+        columns={generateEmployeeTableColumns({ dispatch })}
+        dataSource={employees}
+      />
+
+      <AddEmployee />
+      <EditEmployee
         handleOk={handleOk}
         handleCancel={handleCancel}
         open={open}
-        showModal={() => setOpen(true)}
-        buttonName={'Add Employee'}
-      >
-        <Form name='addEmployee'>
-          <Form.Item name='username' label='Username' rules={[{ required: true, message: 'Please input your username!' }]}>
-            <Input onChange={(e) => setAddEmployee({ ...addEmployee, username: e.target.value })} />
-          </Form.Item>
-
-          <Form.Item
-            name='email'
-            label='E-mail'
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!'
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!'
-              }
-            ]}
-          >
-            <Input onChange={(e) => setAddEmployee({ ...addEmployee, email: e.target.value })} />
-          </Form.Item>
-
-          <Form.Item name='firstname' label='First Name' rules={[{ required: true, message: 'Please input your first name!' }]}>
-            <Input onChange={(e) => setAddEmployee({ ...addEmployee, firstName: e.target.value })} />
-          </Form.Item>
-
-          <Form.Item name='lastname' label='Last Name' rules={[{ required: true, message: 'Please input your last name!' }]}>
-            <Input onChange={(e) => setAddEmployee({ ...addEmployee, lastName: e.target.value })} />
-          </Form.Item>
-
-          <Form.Item name='role' label='Role' rules={[{ required: true, message: 'Please input your Role!' }]}>
-            <Input onChange={(e) => setAddEmployee({ ...addEmployee, role: e.target.value })} />
-          </Form.Item>
-
-          <Form.Item name='address' label='Address' rules={[{ required: true, message: 'Please input your Address!' }]}>
-            <Input onChange={(e) => setAddEmployee({ ...addEmployee, address: e.target.value })} />
-          </Form.Item>
-        </Form>
-      </EmployeeModal>
+        setOpen={setOpen}
+        setEditEmployee={setEditEmployee}
+        editEmployee={editEmployee}
+      />
     </div>
   )
 }

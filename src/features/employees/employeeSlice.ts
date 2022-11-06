@@ -34,6 +34,14 @@ export const addEmployees = createAsyncThunk('employee/addEmployee', async (payl
   return EmployeeAPI.addEmployee(payload)
 })
 
+export const editEmployees = createAsyncThunk('employee/editEmployee', async (payload: IEmployee) => {
+  return EmployeeAPI.editEmployee(payload._id, payload)
+})
+
+export const deleteEmployees = createAsyncThunk('employee/deleteEmployee', async (payload: string) => {
+  return EmployeeAPI.deleteEmployee(payload)
+})
+
 export const employeeSlice = createSlice({
   name: 'employee',
   initialState,
@@ -86,13 +94,38 @@ export const employeeSlice = createSlice({
       //add Employee
       .addCase(addEmployees.pending, (state) => {
         state.loading = true
-        state.employees = [...state.employees]
       })
       .addCase(addEmployees.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
         state.employees = [...state.employees, action.payload]
       })
       .addCase(addEmployees.rejected, (state, action: any) => {
+        state.loading = false
+        state.errors = action.payload
+      })
+
+      //edit Employee
+      .addCase(editEmployees.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(editEmployees.fulfilled, (state, action: any) => {
+        state.loading = false
+        state.employees = state.employees.map((employee) => (employee._id === action.meta.arg._id ? action.payload.data : employee))
+      })
+      .addCase(editEmployees.rejected, (state, action: any) => {
+        state.loading = false
+        state.errors = action.payload
+      })
+
+      //edit Employee
+      .addCase(deleteEmployees.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(deleteEmployees.fulfilled, (state, action: any) => {
+        state.loading = false
+        state.employees = state.employees.filter((employee) => employee._id !== action.meta.arg)
+      })
+      .addCase(deleteEmployees.rejected, (state, action: any) => {
         state.loading = false
         state.errors = action.payload
       })
