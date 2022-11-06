@@ -19,7 +19,20 @@ export interface ILogin {
 }
 
 export interface IEmployee {
-  name: string
+  username: string
   email: string
-  _id: string
+  firstName: string
+  lastName: string
+  role: string
+  address: string
+  _id?: string
+}
+
+export interface IEmployeeModal {
+  title: string
+  handleOk: () => void
+  handleCancel: () => void
+  open: boolean
+  showModal: () => void
+  buttonName: string
 }

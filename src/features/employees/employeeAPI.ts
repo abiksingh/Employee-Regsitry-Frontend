@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ILogin, IRegister } from '../../interfaces/Employee'
+import { IEmployee, ILogin, IRegister } from '../../interfaces/Employee'
 
 export const domain = `http://localhost:3001/api/employee`
 
@@ -19,6 +19,19 @@ export const getEmployees = () => {
     return
   }
   return axios.get(`${domain}/home`, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`
+    }
+  })
+}
+
+export const addEmployee = (payload: IEmployee) => {
+  const token = localStorage.getItem('employeeInfo')
+  if (!token) {
+    return
+  }
+
+  return axios.post(`${domain}/home`, payload, {
     headers: {
       Authorization: `Bearer ${JSON.parse(token)}`
     }

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as EmployeeAPI from './employeeAPI'
-import { IEmployeeSliceState, ILogin, IRegister } from '../../interfaces/Employee'
+import { IEmployee, IEmployeeSliceState, ILogin, IRegister } from '../../interfaces/Employee'
 
 const initialState: IEmployeeSliceState = {
   register: {
@@ -28,6 +28,10 @@ export const loginEmployee = createAsyncThunk('employee/loginEmployee', async (p
 
 export const getEmployees = createAsyncThunk('employee/getEmployee', async () => {
   return EmployeeAPI.getEmployees()
+})
+
+export const addEmployees = createAsyncThunk('employee/addEmployee', async (payload: IEmployee) => {
+  return EmployeeAPI.addEmployee(payload)
 })
 
 export const employeeSlice = createSlice({
@@ -75,6 +79,20 @@ export const employeeSlice = createSlice({
         state.employees = action.payload.data
       })
       .addCase(getEmployees.rejected, (state, action: any) => {
+        state.loading = false
+        state.errors = action.payload
+      })
+
+      //add Employee
+      .addCase(addEmployees.pending, (state) => {
+        state.loading = true
+        state.employees = [...state.employees]
+      })
+      .addCase(addEmployees.fulfilled, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        state.employees = [...state.employees, action.payload]
+      })
+      .addCase(addEmployees.rejected, (state, action: any) => {
         state.loading = false
         state.errors = action.payload
       })
