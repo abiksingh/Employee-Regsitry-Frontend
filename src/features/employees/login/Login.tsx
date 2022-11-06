@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { Button, Form, Input } from 'antd'
 import { loginEmployee } from '../employeeSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -16,6 +18,8 @@ const Login = () => {
         password
       })
     )
+
+    navigate('/home')
   }
 
   return (

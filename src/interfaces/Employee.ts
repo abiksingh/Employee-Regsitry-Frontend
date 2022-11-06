@@ -3,6 +3,7 @@ export interface IEmployeeSliceState {
   errors: any
   loading: boolean
   login: ILogin
+  employees: IEmployee[]
 }
 
 export interface IRegister {
@@ -14,4 +15,11 @@ export interface IRegister {
 export interface ILogin {
   email: string
   password: string
+  token?: string
+}
+
+export interface IEmployee {
+  name: string
+  email: string
+  _id: string
 }

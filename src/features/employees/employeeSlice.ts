@@ -12,8 +12,10 @@ const initialState: IEmployeeSliceState = {
   loading: false,
   login: {
     email: '',
-    password: ''
-  }
+    password: '',
+    token: ''
+  },
+  employees: []
 }
 
 export const registerEmployee = createAsyncThunk('employee/registerEmployee', async (payload: IRegister) => {
@@ -24,6 +26,10 @@ export const loginEmployee = createAsyncThunk('employee/loginEmployee', async (p
   return EmployeeAPI.loginEmployee(payload)
 })
 
+export const getEmployees = createAsyncThunk('employee/getEmployee', async () => {
+  return EmployeeAPI.getEmployees()
+})
+
 export const employeeSlice = createSlice({
   name: 'employee',
   initialState,
@@ -32,6 +38,7 @@ export const employeeSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+
       // register
       .addCase(registerEmployee.pending, (state) => {
         state.loading = true
@@ -54,6 +61,20 @@ export const employeeSlice = createSlice({
         state.login = action.payload
       })
       .addCase(loginEmployee.rejected, (state, action: any) => {
+        state.loading = false
+        state.errors = action.payload
+      })
+
+      // Get Employees
+      .addCase(getEmployees.pending, (state) => {
+        state.loading = true
+        state.employees = []
+      })
+      .addCase(getEmployees.fulfilled, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        state.employees = action.payload.data
+      })
+      .addCase(getEmployees.rejected, (state, action: any) => {
         state.loading = false
         state.errors = action.payload
       })
