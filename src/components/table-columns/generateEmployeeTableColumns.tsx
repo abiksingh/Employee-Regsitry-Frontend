@@ -1,5 +1,5 @@
-import { Button, Space } from 'antd'
-import { deleteEmployees } from '../../features/employees/employeeSlice'
+import { Button } from 'antd'
+import { deleteEmployees } from '../../features/employees/redux-state-management/employeeSlice'
 
 export const generateEmployeeTableColumns = (props: any) => {
   const { dispatch, navigate } = props

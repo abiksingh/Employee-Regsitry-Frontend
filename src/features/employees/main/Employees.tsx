@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { editEmployees, getEmployees } from './employeeSlice'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { editEmployees, getEmployees } from '../redux-state-management/employeeSlice'
 import { Table } from 'antd'
-import { IEmployee } from '../../interfaces/Employee'
-import { generateEmployeeTableColumns } from '../../components/table-columns/generateEmployeeTableColumns'
-import AddEmployee from './add-employee/AddEmployee'
-import EditEmployee from './edit-employee/EditEmployee'
+import { IEmployee } from '../../../interfaces/Employee'
+import { generateEmployeeTableColumns } from '../../../components/table-columns/generateEmployeeTableColumns'
+import AddEmployee from '../components/add-employee/AddEmployee'
+import EditEmployee from '../components/edit-employee/EditEmployee'
 import { useNavigate } from 'react-router-dom'
 
 const Employees = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
-import EmployeeModal from '../../../components/common/EmployeeModal'
+import EmployeeModal from '../../../../components/common/EmployeeModal'
 import { Form, Input } from 'antd'
-import { IEditEmployee } from '../../../interfaces/Employee'
+import { IEditEmployee } from '../../../../interfaces/Employee'
 
 const EditEmployees = (props: IEditEmployee) => {
   const { handleOk, handleCancel, open, setOpen, setEditEmployee, editEmployee } = props

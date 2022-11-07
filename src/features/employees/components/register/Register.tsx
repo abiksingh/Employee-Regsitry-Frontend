@@ -1,30 +1,32 @@
 import React, { useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch } from '../../../../app/hooks'
 import { Button, Form, Input } from 'antd'
-import { loginEmployee } from '../employeeSlice'
-import { useNavigate } from 'react-router-dom'
+import { registerEmployee } from '../../redux-state-management/employeeSlice'
 
-const Login = () => {
+const Register = () => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
+  const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const handleFinish = () => {
     dispatch(
-      loginEmployee({
+      registerEmployee({
+        name,
         email,
         password
       })
     )
-
-    navigate('/home')
   }
 
   return (
     <div>
-      <Form onFinish={handleFinish} name='login'>
+      <Form onFinish={handleFinish} name='register'>
+        <Form.Item name='name' label='Name' tooltip='What do you want others to call you?' rules={[{ required: true, message: 'Please input your name!' }]}>
+          <Input onChange={(e) => setName(e.target.value)} />
+        </Form.Item>
+
         <Form.Item
           name='email'
           label='E-mail'
@@ -58,7 +60,7 @@ const Login = () => {
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type='primary' htmlType='submit'>
-            Login
+            Register
           </Button>
         </Form.Item>
       </Form>
@@ -66,4 +68,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

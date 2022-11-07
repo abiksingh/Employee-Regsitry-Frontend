@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import * as EmployeeAPI from './employeeAPI'
-import { IEmployee, IEmployeeSliceState, ILogin, IRegister } from '../../interfaces/Employee'
+import * as EmployeeAPI from '../api/employeeAPI'
+import { IEmployee, IEmployeeSliceState, ILogin, IRegister } from '../../../interfaces/Employee'
 
 const initialState: IEmployeeSliceState = {
   register: {

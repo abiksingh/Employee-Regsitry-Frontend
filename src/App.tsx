@@ -1,10 +1,10 @@
 import React from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Login from './features/employees/login/Login'
-import Employees from './features/employees/Employees'
-import Register from './features/employees/register/Register'
-import AddComments from './features/employees/add-comments/AddComments'
+import Login from './features/employees/components/login/Login'
+import Employees from './features/employees/main/Employees'
+import Register from './features/employees/components/register/Register'
+import AddComments from './features/employees/components/add-comments/AddComments'
 
 const App = () => {
   return (

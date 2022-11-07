@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { IEmployee, ILogin, IRegister } from '../../interfaces/Employee'
+import { IEmployee, ILogin, IRegister } from '../../../interfaces/Employee'
 
 export const domain = `http://localhost:3001/api/employee`
 
@@ -42,7 +42,6 @@ export const addEmployee = (payload: IEmployee) => {
   if (!token) {
     return
   }
-
   return axios.post(`${domain}/home`, payload, {
     headers: {
       Authorization: `Bearer ${JSON.parse(token)}`
@@ -55,7 +54,6 @@ export const editEmployee = (id: string | undefined, payload: IEmployee) => {
   if (!token) {
     return
   }
-
   return axios.put(`${domain}/${id}`, payload, {
     headers: {
       Authorization: `Bearer ${JSON.parse(token)}`
@@ -68,7 +66,6 @@ export const deleteEmployee = (id: string) => {
   if (!token) {
     return
   }
-
   return axios.delete(`${domain}/${id}`, {
     headers: {
       Authorization: `Bearer ${JSON.parse(token)}`
@@ -81,7 +78,6 @@ export const addComments = (id: string, comment: string) => {
   if (!token) {
     return
   }
-
   return axios.post(
     `${domain}/employee-details/${id}`,
     { comment },

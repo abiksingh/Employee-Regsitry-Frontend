@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import EmployeeModal from '../../../components/common/EmployeeModal'
+import EmployeeModal from '../../../../components/common/EmployeeModal'
 import { Form, Input, Table } from 'antd'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { addComments, getEmployeeById } from '../employeeSlice'
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
+import { addComments, getEmployeeById } from '../../redux-state-management/employeeSlice'
 import { useParams } from 'react-router-dom'
-import { generateCommentTableColumns } from '../../../components/table-columns/generateCommentTableColumns'
+import { generateCommentTableColumns } from '../../../../components/table-columns/generateCommentTableColumns'
 
 const AddComments = () => {
   const dispatch = useAppDispatch()

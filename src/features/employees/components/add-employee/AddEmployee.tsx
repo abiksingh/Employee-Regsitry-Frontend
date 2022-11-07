@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import EmployeeModal from '../../../components/common/EmployeeModal'
+import EmployeeModal from '../../../../components/common/EmployeeModal'
 import { Form, Input } from 'antd'
-import { IEmployee } from '../../../interfaces/Employee'
-import { addEmployees } from '../employeeSlice'
-import { useAppDispatch } from '../../../app/hooks'
+import { IEmployee } from '../../../../interfaces/Employee'
+import { addEmployees } from '../../redux-state-management/employeeSlice'
+import { useAppDispatch } from '../../../../app/hooks'
 
 const AddEmployees = () => {
   const dispatch = useAppDispatch()
