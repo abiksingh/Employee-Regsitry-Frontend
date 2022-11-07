@@ -6,9 +6,11 @@ import { IEmployee } from '../../interfaces/Employee'
 import { generateEmployeeTableColumns } from '../../components/table-columns/generateEmployeeTableColumns'
 import AddEmployee from './add-employee/AddEmployee'
 import EditEmployee from './edit-employee/EditEmployee'
+import { useNavigate } from 'react-router-dom'
 
 const Employees = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const { employees } = useAppSelector((state) => state.employee)
 
@@ -64,7 +66,7 @@ const Employees = () => {
             }
           }
         }}
-        columns={generateEmployeeTableColumns({ dispatch })}
+        columns={generateEmployeeTableColumns({ dispatch, navigate })}
         dataSource={employees}
       />
 

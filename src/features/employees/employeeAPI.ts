@@ -25,6 +25,18 @@ export const getEmployees = () => {
   })
 }
 
+export const getEmployeeById = (id: string) => {
+  const token = localStorage.getItem('employeeInfo')
+  if (!token) {
+    return
+  }
+  return axios.get(`${domain}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`
+    }
+  })
+}
+
 export const addEmployee = (payload: IEmployee) => {
   const token = localStorage.getItem('employeeInfo')
   if (!token) {
@@ -62,4 +74,21 @@ export const deleteEmployee = (id: string) => {
       Authorization: `Bearer ${JSON.parse(token)}`
     }
   })
+}
+
+export const addComments = (id: string, comment: string) => {
+  const token = localStorage.getItem('employeeInfo')
+  if (!token) {
+    return
+  }
+
+  return axios.post(
+    `${domain}/employee-details/${id}`,
+    { comment },
+    {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }
+  )
 }

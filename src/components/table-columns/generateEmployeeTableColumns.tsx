@@ -2,7 +2,7 @@ import { Button, Space } from 'antd'
 import { deleteEmployees } from '../../features/employees/employeeSlice'
 
 export const generateEmployeeTableColumns = (props: any) => {
-  const { dispatch } = props
+  const { dispatch, navigate } = props
 
   return [
     {
@@ -32,8 +32,13 @@ export const generateEmployeeTableColumns = (props: any) => {
 
     {
       title: 'Action',
-      key: 'action',
+      key: 'delete',
       render: (_: any, record: any) => <Button onClick={() => dispatch(deleteEmployees(record._id))}>Delete</Button>
+    },
+    {
+      title: 'Action',
+      key: 'details',
+      render: (_: any, record: any) => <Button onClick={() => navigate(`/employee-details/${record._id}`)}>Details</Button>
     }
   ]
 }

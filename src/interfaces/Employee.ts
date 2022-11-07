@@ -4,6 +4,7 @@ export interface IEmployeeSliceState {
   loading: boolean
   login: ILogin
   employees: IEmployee[]
+  employee: IEmployee
 }
 
 export interface IRegister {
@@ -25,6 +26,7 @@ export interface IEmployee {
   lastName: string
   role: string
   address: string
+  comment?: []
   _id?: string
 }
 

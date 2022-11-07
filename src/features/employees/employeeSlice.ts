@@ -15,7 +15,8 @@ const initialState: IEmployeeSliceState = {
     password: '',
     token: ''
   },
-  employees: []
+  employees: [],
+  employee: {} as IEmployee
 }
 
 export const registerEmployee = createAsyncThunk('employee/registerEmployee', async (payload: IRegister) => {
@@ -30,6 +31,10 @@ export const getEmployees = createAsyncThunk('employee/getEmployee', async () =>
   return EmployeeAPI.getEmployees()
 })
 
+export const getEmployeeById = createAsyncThunk('employee/getEmployeeById', async (payload: string) => {
+  return EmployeeAPI.getEmployeeById(payload)
+})
+
 export const addEmployees = createAsyncThunk('employee/addEmployee', async (payload: IEmployee) => {
   return EmployeeAPI.addEmployee(payload)
 })
@@ -40,6 +45,10 @@ export const editEmployees = createAsyncThunk('employee/editEmployee', async (pa
 
 export const deleteEmployees = createAsyncThunk('employee/deleteEmployee', async (payload: string) => {
   return EmployeeAPI.deleteEmployee(payload)
+})
+
+export const addComments = createAsyncThunk('employee/addComments', async (payload: any) => {
+  return EmployeeAPI.addComments(payload.id, payload.comment)
 })
 
 export const employeeSlice = createSlice({
@@ -91,6 +100,19 @@ export const employeeSlice = createSlice({
         state.errors = action.payload
       })
 
+      // Get Employees By Id
+      .addCase(getEmployeeById.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getEmployeeById.fulfilled, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        state.employee = action.payload.data
+      })
+      .addCase(getEmployeeById.rejected, (state, action: any) => {
+        state.loading = false
+        state.errors = action.payload
+      })
+
       //add Employee
       .addCase(addEmployees.pending, (state) => {
         state.loading = true
@@ -117,7 +139,7 @@ export const employeeSlice = createSlice({
         state.errors = action.payload
       })
 
-      //edit Employee
+      //delete Employee
       .addCase(deleteEmployees.pending, (state) => {
         state.loading = true
       })
@@ -126,6 +148,19 @@ export const employeeSlice = createSlice({
         state.employees = state.employees.filter((employee) => employee._id !== action.meta.arg)
       })
       .addCase(deleteEmployees.rejected, (state, action: any) => {
+        state.loading = false
+        state.errors = action.payload
+      })
+
+      //add Comments
+      .addCase(addComments.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(addComments.fulfilled, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        state.employee.comment = action.payload
+      })
+      .addCase(addComments.rejected, (state, action: any) => {
         state.loading = false
         state.errors = action.payload
       })
