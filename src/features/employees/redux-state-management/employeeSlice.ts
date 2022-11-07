@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as EmployeeAPI from '../api/employeeAPI'
 import { IEmployee, IEmployeeSliceState, ILogin, IRegister } from '../../../interfaces/Employee'
+import { notification } from 'antd'
 
 const initialState: IEmployeeSliceState = {
   register: {
@@ -67,6 +68,9 @@ export const employeeSlice = createSlice({
       .addCase(registerEmployee.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
         state.register = action.payload
+        notification.open({
+          message: 'Employee Registered'
+        })
       })
       .addCase(registerEmployee.rejected, (state, action: any) => {
         state.loading = false

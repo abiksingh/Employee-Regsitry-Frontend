@@ -1,5 +1,5 @@
 import React from 'react'
-import EmployeeModal from '../../../../components/common/EmployeeModal'
+import EmployeeModal from '../../../../components/common/modal/EmployeeModal'
 import { Form, Input } from 'antd'
 import { IEditEmployee } from '../../../../interfaces/Employee'
 

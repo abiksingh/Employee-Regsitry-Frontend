@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import EmployeeModal from '../../../../components/common/EmployeeModal'
+import EmployeeModal from '../../../../components/common/modal/EmployeeModal'
 import { Form, Input, Table } from 'antd'
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks'
 import { addComments, getEmployeeById } from '../../redux-state-management/employeeSlice'

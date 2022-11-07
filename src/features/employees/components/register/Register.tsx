@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { useAppDispatch } from '../../../../app/hooks'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, Layout, Typography } from 'antd'
 import { registerEmployee } from '../../redux-state-management/employeeSlice'
+import { Content } from 'antd/es/layout/layout'
+import { useForm } from 'antd/es/form/Form'
 
 const Register = () => {
   const dispatch = useAppDispatch()
+
+  const [registerForm] = useForm()
 
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -18,52 +22,57 @@ const Register = () => {
         password
       })
     )
+
+    registerForm.resetFields()
   }
 
   return (
     <div>
-      <Form onFinish={handleFinish} name='register'>
-        <Form.Item name='name' label='Name' tooltip='What do you want others to call you?' rules={[{ required: true, message: 'Please input your name!' }]}>
-          <Input onChange={(e) => setName(e.target.value)} />
-        </Form.Item>
+      <Layout className={'layout-height '}>
+        <Content className={'content'}>
+          <Form onFinish={handleFinish} form={registerForm} name='registerForm'>
+            <Typography.Text type='secondary'>Name</Typography.Text>
+            <Form.Item name='name' tooltip='What do you want others to call you?' rules={[{ required: true, message: 'Please input your name!' }]}>
+              <Input onChange={(e) => setName(e.target.value)} />
+            </Form.Item>
+            <Typography.Text type='secondary'>Email</Typography.Text>
+            <Form.Item
+              name='email'
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!'
+                }
+              ]}
+            >
+              <Input onChange={(e) => setEmail(e.target.value)} />
+            </Form.Item>
+            <Typography.Text type='secondary'>Password</Typography.Text>
+            <Form.Item
+              name='password'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!'
+                }
+              ]}
+              hasFeedback
+            >
+              <Input.Password onChange={(e) => setPassword(e.target.value)} />
+            </Form.Item>
 
-        <Form.Item
-          name='email'
-          label='E-mail'
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!'
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!'
-            }
-          ]}
-        >
-          <Input onChange={(e) => setEmail(e.target.value)} />
-        </Form.Item>
-
-        <Form.Item
-          name='password'
-          label='Password'
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!'
-            }
-          ]}
-          hasFeedback
-        >
-          <Input.Password onChange={(e) => setPassword(e.target.value)} />
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type='primary' htmlType='submit'>
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button className={'mt-2'} type='primary' htmlType='submit'>
+                Register
+              </Button>
+            </Form.Item>
+          </Form>
+        </Content>
+      </Layout>
     </div>
   )
 }
