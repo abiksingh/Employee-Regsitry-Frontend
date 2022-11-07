@@ -1,6 +1,5 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import employeeReducer from '../features/employees/redux-state-management/employeeSlice'
-import { CurriedGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware'
 
 export const store = configureStore({
   reducer: {
