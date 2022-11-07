@@ -85,6 +85,9 @@ export const employeeSlice = createSlice({
         state.loading = false
         state.login = action.payload
         localStorage.setItem('employeeInfo', JSON.stringify(action.payload.data.token))
+        notification.open({
+          message: 'Logged In'
+        })
       })
       .addCase(loginEmployee.rejected, (state, action: any) => {
         state.loading = false

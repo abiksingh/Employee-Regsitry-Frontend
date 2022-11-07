@@ -7,7 +7,6 @@ import { useForm } from 'antd/es/form/Form'
 
 const Register = () => {
   const dispatch = useAppDispatch()
-
   const [registerForm] = useForm()
 
   const [name, setName] = useState<string>('')
