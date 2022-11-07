@@ -67,7 +67,7 @@ const Employees = () => {
           }
         }}
         columns={generateEmployeeTableColumns({ dispatch, navigate })}
-        dataSource={employees}
+        dataSource={employees || []}
       />
 
       <AddEmployee />

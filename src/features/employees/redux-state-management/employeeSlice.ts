@@ -80,6 +80,7 @@ export const employeeSlice = createSlice({
       .addCase(loginEmployee.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
         state.login = action.payload
+        localStorage.setItem('employeeInfo', JSON.stringify(action.payload.data.token))
       })
       .addCase(loginEmployee.rejected, (state, action: any) => {
         state.loading = false
@@ -89,7 +90,6 @@ export const employeeSlice = createSlice({
       // Get Employees
       .addCase(getEmployees.pending, (state) => {
         state.loading = true
-        state.employees = []
       })
       .addCase(getEmployees.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
@@ -119,7 +119,7 @@ export const employeeSlice = createSlice({
       })
       .addCase(addEmployees.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
-        state.employees = [...state.employees, action.payload]
+        state.employees = [...state.employees, action.payload.data]
       })
       .addCase(addEmployees.rejected, (state, action: any) => {
         state.loading = false
@@ -158,7 +158,8 @@ export const employeeSlice = createSlice({
       })
       .addCase(addComments.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
-        state.employee.comment = action.payload
+        console.log(action)
+        state.employee.comment = [...state.employee.comment, action.payload.data]
       })
       .addCase(addComments.rejected, (state, action: any) => {
         state.loading = false

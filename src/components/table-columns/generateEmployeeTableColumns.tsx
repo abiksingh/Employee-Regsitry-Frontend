@@ -31,13 +31,11 @@ export const generateEmployeeTableColumns = (props: any) => {
     },
 
     {
-      title: 'Action',
-      key: 'delete',
+      title: 'Delete',
       render: (_: any, record: any) => <Button onClick={() => dispatch(deleteEmployees(record._id))}>Delete</Button>
     },
     {
-      title: 'Action',
-      key: 'details',
+      title: 'Details',
       render: (_: any, record: any) => <Button onClick={() => navigate(`/employee-details/${record._id}`)}>Details</Button>
     }
   ]

@@ -51,7 +51,7 @@ const AddComments = () => {
         buttonName={'Add Comments'}
       >
         <Form name='addComments'>
-          <Form.Item name='addComments' label='Add Comments' rules={[{ required: true, message: 'Input a comment here!' }]}>
+          <Form.Item label='Add Comments' rules={[{ required: true, message: 'Input a comment here!' }]}>
             <Input.TextArea rows={4} onChange={(e) => setComment(e.target.value)} />
           </Form.Item>
         </Form>

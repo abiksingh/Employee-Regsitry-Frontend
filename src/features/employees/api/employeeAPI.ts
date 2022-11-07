@@ -1,90 +1,36 @@
-import axios from 'axios'
 import { IEmployee, ILogin, IRegister } from '../../../interfaces/Employee'
+import { axios_instance } from '../../../utils/axios'
 
 export const domain = `http://localhost:3001/api/employee`
 
 export const registerEmployee = (payload: IRegister) => {
-  return axios.post(`${domain}/register`, payload)
+  return axios_instance.post(`${domain}/register`, payload)
 }
 
-export const loginEmployee = async (payload: ILogin) => {
-  const { data } = await axios.post(`${domain}/login`, payload)
-  localStorage.setItem('employeeInfo', JSON.stringify(data.token))
-  return data
+export const loginEmployee = (payload: ILogin) => {
+  return axios_instance.post(`${domain}/login`, payload)
 }
 
 export const getEmployees = () => {
-  const token = localStorage.getItem('employeeInfo')
-  if (!token) {
-    return
-  }
-  return axios.get(`${domain}/home`, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`
-    }
-  })
+  return axios_instance.get(`${domain}/home`)
 }
 
 export const getEmployeeById = (id: string) => {
-  const token = localStorage.getItem('employeeInfo')
-  if (!token) {
-    return
-  }
-  return axios.get(`${domain}/${id}`, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`
-    }
-  })
+  return axios_instance.get(`${domain}/${id}`)
 }
 
 export const addEmployee = (payload: IEmployee) => {
-  const token = localStorage.getItem('employeeInfo')
-  if (!token) {
-    return
-  }
-  return axios.post(`${domain}/home`, payload, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`
-    }
-  })
+  return axios_instance.post(`${domain}/home`, payload)
 }
 
 export const editEmployee = (id: string | undefined, payload: IEmployee) => {
-  const token = localStorage.getItem('employeeInfo')
-  if (!token) {
-    return
-  }
-  return axios.put(`${domain}/${id}`, payload, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`
-    }
-  })
+  return axios_instance.put(`${domain}/${id}`, payload)
 }
 
 export const deleteEmployee = (id: string) => {
-  const token = localStorage.getItem('employeeInfo')
-  if (!token) {
-    return
-  }
-  return axios.delete(`${domain}/${id}`, {
-    headers: {
-      Authorization: `Bearer ${JSON.parse(token)}`
-    }
-  })
+  return axios_instance.delete(`${domain}/${id}`)
 }
 
 export const addComments = (id: string, comment: string) => {
-  const token = localStorage.getItem('employeeInfo')
-  if (!token) {
-    return
-  }
-  return axios.post(
-    `${domain}/employee-details/${id}`,
-    { comment },
-    {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(token)}`
-      }
-    }
-  )
+  return axios_instance.post(`${domain}/employee-details/${id}`, { comment })
 }

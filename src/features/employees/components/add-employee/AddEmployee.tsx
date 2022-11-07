@@ -48,7 +48,7 @@ const AddEmployees = () => {
       buttonName={'Add Employee'}
     >
       <Form name='addEmployee'>
-        <Form.Item name='username' label='Username' rules={[{ required: true, message: 'Please input your username!' }]}>
+        <Form.Item label='Username' rules={[{ required: true, message: 'Please input your username!' }]}>
           <Input onChange={(e) => setAddEmployee({ ...addEmployee, username: e.target.value })} />
         </Form.Item>
 
@@ -69,19 +69,19 @@ const AddEmployees = () => {
           <Input onChange={(e) => setAddEmployee({ ...addEmployee, email: e.target.value })} />
         </Form.Item>
 
-        <Form.Item name='firstname' label='First Name' rules={[{ required: true, message: 'Please input your first name!' }]}>
+        <Form.Item label='First Name' rules={[{ required: true, message: 'Please input your first name!' }]}>
           <Input onChange={(e) => setAddEmployee({ ...addEmployee, firstName: e.target.value })} />
         </Form.Item>
 
-        <Form.Item name='lastname' label='Last Name' rules={[{ required: true, message: 'Please input your last name!' }]}>
+        <Form.Item label='Last Name' rules={[{ required: true, message: 'Please input your last name!' }]}>
           <Input onChange={(e) => setAddEmployee({ ...addEmployee, lastName: e.target.value })} />
         </Form.Item>
 
-        <Form.Item name='role' label='Role' rules={[{ required: true, message: 'Please input your Role!' }]}>
+        <Form.Item label='Role' rules={[{ required: true, message: 'Please input your Role!' }]}>
           <Input onChange={(e) => setAddEmployee({ ...addEmployee, role: e.target.value })} />
         </Form.Item>
 
-        <Form.Item name='address' label='Address' rules={[{ required: true, message: 'Please input your Address!' }]}>
+        <Form.Item label='Address' rules={[{ required: true, message: 'Please input your Address!' }]}>
           <Input onChange={(e) => setAddEmployee({ ...addEmployee, address: e.target.value })} />
         </Form.Item>
       </Form>

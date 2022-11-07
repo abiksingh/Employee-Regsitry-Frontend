@@ -26,7 +26,7 @@ export interface IEmployee {
   lastName: string
   role: string
   address: string
-  comment?: []
+  comment?: any
   _id?: string
 }
 
