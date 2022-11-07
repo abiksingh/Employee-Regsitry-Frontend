@@ -37,6 +37,8 @@ export interface IEmployeeModal {
   open: boolean
   showModal: () => void
   buttonName?: string
+  className?: string
+  style?: any
 }
 
 export interface IEditEmployee {

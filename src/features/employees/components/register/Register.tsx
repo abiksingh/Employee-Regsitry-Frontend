@@ -32,7 +32,7 @@ const Register = () => {
           <Form onFinish={handleFinish} form={registerForm} name='registerForm'>
             <Typography.Text type='secondary'>Name</Typography.Text>
             <Form.Item name='name' tooltip='What do you want others to call you?' rules={[{ required: true, message: 'Please input your name!' }]}>
-              <Input onChange={(e) => setName(e.target.value)} />
+              <Input placeholder={'name'} onChange={(e) => setName(e.target.value)} />
             </Form.Item>
             <Typography.Text type='secondary'>Email</Typography.Text>
             <Form.Item
@@ -48,7 +48,7 @@ const Register = () => {
                 }
               ]}
             >
-              <Input onChange={(e) => setEmail(e.target.value)} />
+              <Input placeholder={'email'} onChange={(e) => setEmail(e.target.value)} />
             </Form.Item>
             <Typography.Text type='secondary'>Password</Typography.Text>
             <Form.Item
@@ -61,7 +61,7 @@ const Register = () => {
               ]}
               hasFeedback
             >
-              <Input.Password onChange={(e) => setPassword(e.target.value)} />
+              <Input.Password placeholder={'password'} onChange={(e) => setPassword(e.target.value)} />
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

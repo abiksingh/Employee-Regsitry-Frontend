@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import { editEmployees, getEmployees } from '../redux-state-management/employeeSlice'
-import { Table } from 'antd'
+import { Card, Layout, Table, Typography } from 'antd'
 import { IEmployee } from '../../../interfaces/Employee'
 import { generateEmployeeTableColumns } from '../../../components/table-columns/generateEmployeeTableColumns'
 import AddEmployee from '../components/add-employee/AddEmployee'
 import EditEmployee from '../components/edit-employee/EditEmployee'
 import { useNavigate } from 'react-router-dom'
+import { Content } from 'antd/es/layout/layout'
 
 const Employees = () => {
   const dispatch = useAppDispatch()
@@ -51,26 +52,35 @@ const Employees = () => {
 
   return (
     <div>
-      <h1>Employees</h1>
-      <Table
-        rowKey='_id'
-        onRow={(record) => {
-          return {
-            onDoubleClick: () => {
-              setEmployeeId(record._id)
-              setEditEmployee({
-                ...record
-              })
+      <Typography.Title className={'content'}>Employees</Typography.Title>
+      <Layout className={'layout-height '}>
+        <Content>
+          <Card>
+            <div className={'mt-2'}>
+              <AddEmployee />
+            </div>
 
-              setOpen(true)
-            }
-          }
-        }}
-        columns={generateEmployeeTableColumns({ dispatch, navigate })}
-        dataSource={employees || []}
-      />
+            <Table
+              className={'mt-2'}
+              rowKey='_id'
+              onRow={(record) => {
+                return {
+                  onDoubleClick: () => {
+                    setEmployeeId(record._id)
+                    setEditEmployee({
+                      ...record
+                    })
 
-      <AddEmployee />
+                    setOpen(true)
+                  }
+                }
+              }}
+              columns={generateEmployeeTableColumns({ dispatch, navigate })}
+              dataSource={employees || []}
+            />
+          </Card>
+        </Content>
+      </Layout>
       <EditEmployee
         handleOk={handleOk}
         handleCancel={handleCancel}

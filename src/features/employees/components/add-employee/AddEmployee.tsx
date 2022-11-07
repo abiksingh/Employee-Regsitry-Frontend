@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import EmployeeModal from '../../../../components/common/modal/EmployeeModal'
-import { Form, Input } from 'antd'
+import { Form, Input, Typography } from 'antd'
 import { IEmployee } from '../../../../interfaces/Employee'
 import { addEmployees } from '../../redux-state-management/employeeSlice'
 import { useAppDispatch } from '../../../../app/hooks'
+import { useForm } from 'antd/es/form/Form'
 
 const AddEmployees = () => {
   const dispatch = useAppDispatch()
+  const [addEmployeeForm] = useForm()
 
   const [open, setOpen] = useState<boolean>(false)
 
@@ -36,6 +38,7 @@ const AddEmployees = () => {
     )
 
     setOpen(false)
+    addEmployeeForm.resetFields()
   }
 
   return (
@@ -47,14 +50,14 @@ const AddEmployees = () => {
       showModal={() => setOpen(true)}
       buttonName={'Add Employee'}
     >
-      <Form name='addEmployee'>
-        <Form.Item label='Username' rules={[{ required: true, message: 'Please input your username!' }]}>
-          <Input onChange={(e) => setAddEmployee({ ...addEmployee, username: e.target.value })} />
+      <Form form={addEmployeeForm} name='addEmployeeForm'>
+        <Typography.Text type='secondary'>Username</Typography.Text>
+        <Form.Item name={'username'} rules={[{ required: true, message: 'Please input your username!' }]}>
+          <Input placeholder={'Username'} onChange={(e) => setAddEmployee({ ...addEmployee, username: e.target.value })} />
         </Form.Item>
-
+        <Typography.Text type='secondary'>Email</Typography.Text>
         <Form.Item
           name='email'
-          label='E-mail'
           rules={[
             {
               type: 'email',
@@ -66,23 +69,23 @@ const AddEmployees = () => {
             }
           ]}
         >
-          <Input onChange={(e) => setAddEmployee({ ...addEmployee, email: e.target.value })} />
+          <Input placeholder={'Email'} onChange={(e) => setAddEmployee({ ...addEmployee, email: e.target.value })} />
         </Form.Item>
-
-        <Form.Item label='First Name' rules={[{ required: true, message: 'Please input your first name!' }]}>
-          <Input onChange={(e) => setAddEmployee({ ...addEmployee, firstName: e.target.value })} />
+        <Typography.Text type='secondary'>First Name</Typography.Text>
+        <Form.Item name={'firstName'} rules={[{ required: true, message: 'Please input your first name!' }]}>
+          <Input placeholder={'First Name'} onChange={(e) => setAddEmployee({ ...addEmployee, firstName: e.target.value })} />
         </Form.Item>
-
-        <Form.Item label='Last Name' rules={[{ required: true, message: 'Please input your last name!' }]}>
-          <Input onChange={(e) => setAddEmployee({ ...addEmployee, lastName: e.target.value })} />
+        <Typography.Text type='secondary'>Last Name</Typography.Text>
+        <Form.Item name={'lastName'} rules={[{ required: true, message: 'Please input your last name!' }]}>
+          <Input placeholder={'Last Name'} onChange={(e) => setAddEmployee({ ...addEmployee, lastName: e.target.value })} />
         </Form.Item>
-
-        <Form.Item label='Role' rules={[{ required: true, message: 'Please input your Role!' }]}>
-          <Input onChange={(e) => setAddEmployee({ ...addEmployee, role: e.target.value })} />
+        <Typography.Text type='secondary'>Role</Typography.Text>
+        <Form.Item name={'role'} rules={[{ required: true, message: 'Please input your Role!' }]}>
+          <Input placeholder={'Role'} onChange={(e) => setAddEmployee({ ...addEmployee, role: e.target.value })} />
         </Form.Item>
-
-        <Form.Item label='Address' rules={[{ required: true, message: 'Please input your Address!' }]}>
-          <Input onChange={(e) => setAddEmployee({ ...addEmployee, address: e.target.value })} />
+        <Typography.Text type='secondary'>Address</Typography.Text>
+        <Form.Item name={'address'} rules={[{ required: true, message: 'Please input your Address!' }]}>
+          <Input placeholder={'Address'} onChange={(e) => setAddEmployee({ ...addEmployee, address: e.target.value })} />
         </Form.Item>
       </Form>
     </EmployeeModal>
