@@ -4,10 +4,12 @@ import { Button, Form, Input, Layout, Typography } from 'antd'
 import { registerEmployee } from '../../redux-state-management/employeeSlice'
 import { Content } from 'antd/es/layout/layout'
 import { useForm } from 'antd/es/form/Form'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const dispatch = useAppDispatch()
   const [registerForm] = useForm()
+  const navigate = useNavigate()
 
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -21,7 +23,7 @@ const Register = () => {
         password
       })
     )
-
+    navigate('/login')
     registerForm.resetFields()
   }
 
