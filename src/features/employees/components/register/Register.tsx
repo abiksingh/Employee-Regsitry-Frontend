@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 const Register = () => {
   const dispatch = useAppDispatch()
   const [registerForm] = useForm()
-  const navigate = useNavigate()
 
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -23,7 +22,6 @@ const Register = () => {
         password
       })
     )
-    navigate('/login')
     registerForm.resetFields()
   }
 
