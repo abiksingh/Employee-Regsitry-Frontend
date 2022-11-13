@@ -65,7 +65,7 @@ const AddComments = () => {
               </EmployeeModal>
             </div>
             <div className={'mt-2'}>
-              <Table rowKey='_id' columns={generateCommentTableColumns()} dataSource={employee.comment || []} />
+              <Table rowKey={(record) => record._id || ''} columns={generateCommentTableColumns()} dataSource={employee.comment || []} />
             </div>
           </Card>
         </Content>

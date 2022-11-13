@@ -165,7 +165,6 @@ export const employeeSlice = createSlice({
       })
       .addCase(addComments.fulfilled, (state, action: PayloadAction<any>) => {
         state.loading = false
-        console.log(action)
         state.employee.comment = [...state.employee.comment, action.payload.data]
       })
       .addCase(addComments.rejected, (state, action: any) => {
