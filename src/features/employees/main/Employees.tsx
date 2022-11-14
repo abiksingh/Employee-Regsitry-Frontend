@@ -50,8 +50,6 @@ const Employees = () => {
     setOpen(false)
   }
 
-  console.log(editEmployee)
-
   return (
     <div>
       <Typography.Title className={'content'}>Employees</Typography.Title>
