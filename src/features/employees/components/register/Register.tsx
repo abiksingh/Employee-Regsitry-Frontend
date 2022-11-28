@@ -4,10 +4,12 @@ import { Button, Form, Input, Layout, Typography } from 'antd'
 import { registerEmployee } from '../../redux-state-management/employeeSlice'
 import { Content } from 'antd/es/layout/layout'
 import { useForm } from 'antd/es/form/Form'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const dispatch = useAppDispatch()
   const [registerForm] = useForm()
+  const navigate = useNavigate()
 
   const [name, setName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -66,6 +68,12 @@ const Register = () => {
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
               <Button className={'mt-2'} type='primary' htmlType='submit'>
                 Register
+              </Button>
+            </Form.Item>
+            <Typography.Text type='secondary'>If already register then Login from below</Typography.Text>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button onClick={() => navigate(`/login`)} className={'mt-2'} type='primary' htmlType='submit'>
+                Login
               </Button>
             </Form.Item>
           </Form>
